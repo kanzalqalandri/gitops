@@ -1,21 +1,20 @@
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hello-world
+  name: aws-ebs-csi-driver
   namespace: argocd
 spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: hello-world
+    namespace: kube-system
   sources:
-    - repoURL: https://charts.softonic.io
-      chart: hello-world-app
-      targetRevision: 1.2.2
+    - repoURL: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+      chart: aws-ebs-csi-driver
+      targetRevision: 2.6.7
       helm:
         valueFiles:
-          - $values/values/client-a/hello-world.yaml
+          - $values/values/client-a/aws-ebs-csi-driver.yaml
     - repoURL: https://github.com/kanzalqalandri/gitops.git
       targetRevision: main
       ref: values

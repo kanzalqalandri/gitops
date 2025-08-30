@@ -1,28 +1,22 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: postgres
-#   namespace: argocd
-# spec:
-#   project: default
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: postgres
-#   sources:
-#     - chart: postgresql
-#       repoURL: https://charts.bitnami.com/bitnami
-#       targetRevision: 15.5.32
-#     - repoURL: https://github.com/your-org/gitops.git
-#       targetRevision: main
-#       ref: values
-#       path: values/client-a
-#   source:
-#     helm:
-#       valueFiles:
-#         - $values/postgres.yaml
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#   syncOptions:
-#     - CreateNamespace=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: postgres
+  source:
+    repoURL: https://github.com/kanzalqalandri/gitops.git
+    targetRevision: main
+    path: charts/client-a/postgres
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

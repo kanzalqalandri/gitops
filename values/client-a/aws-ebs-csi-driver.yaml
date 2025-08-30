@@ -1,0 +1,7 @@
+controller:
+  k8sTagClusterId: "kanzal-test"
+  extraVolumeTags:
+    Customer: APPORTO
+
+node:
+  tolerateAllTaints: true
