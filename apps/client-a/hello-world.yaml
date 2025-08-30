@@ -1,0 +1,90 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: hello-world
+#   namespace: argocd
+# spec:
+#   project: default
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: hello-world
+#   sources:
+#     - chart: hello-world-app
+#       repoURL: https://charts.softonic.io
+#       targetRevision: 1.2.2
+#     - repoURL: https://github.com/kanzalqalandri/gitops.git
+#       targetRevision: main
+#       ref: values
+#       path: values/client-a
+#   source:
+#     helm:
+#       valueFiles:
+#         - $values/hello-world.yaml
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#   syncOptions:
+#     - CreateNamespace=true
+
+
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: hello-world
+#   namespace: argocd
+# spec:
+#   project: default
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: hello-world
+
+#   # Multi-source: chart + a repo that only holds values
+#   sources:
+#     - repoURL: https://charts.softonic.io
+#       chart: hello-world-app
+#       targetRevision: 1.2.2
+#       helm:
+#         valueFiles:
+#           - $values/hello-world.yaml
+#     - repoURL: https://github.com/kanzalqalandri/gitops.git
+#       targetRevision: main
+#       ref: values
+#       path: values/client-a
+
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
+
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hello-world
+  sources:
+    - repoURL: https://charts.softonic.io
+      chart: hello-world-app
+      targetRevision: 1.2.2
+      helm:
+        valueFiles:
+          - $values/values/client-a/hello-world.yaml   # ← full path from repo root
+    - repoURL: https://github.com/kanzalqalandri/gitops.git
+      targetRevision: main
+      ref: values
+      path: values/client-a
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

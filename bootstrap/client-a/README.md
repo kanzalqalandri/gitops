@@ -9,4 +9,4 @@ helm upgrade --install argocd argo/argo-cd \
   -f bootstrap/client-a/argocd-values.yaml
 
 # install root app
-kubectl apply -f clusters/client-a/bootstrap/root-application.yaml
+kubectl apply -f bootstrap/client-a/root-application.yaml
