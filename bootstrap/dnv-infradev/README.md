@@ -1,4 +1,4 @@
-# add repo and create ns
+# add repo
 helm repo add argo https://argoproj.github.io/argo-helm
 kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
 
@@ -6,7 +6,7 @@ kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
 helm upgrade --install argocd argo/argo-cd \
   --namespace argocd \
   --version 8.3.1 \
-  -f bootstrap/client-a/argocd-values.yaml
+  -f bootstrap/dnv-infradev/argocd-values.yaml
 
 # install root app
-kubectl apply -f bootstrap/client-a/root-application.yaml
+kubectl apply -f bootstrap/dnv-infradev/root-application.yaml

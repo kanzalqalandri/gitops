@@ -1,7 +1,7 @@
 controller:
   k8sTagClusterId: "kanzal-test"
   extraVolumeTags:
-    Customer: APPORTO
+    Customer: PufferSoft
 
 node:
   tolerateAllTaints: true
