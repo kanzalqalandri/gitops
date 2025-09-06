@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-client-a
+  name: client-a-root-app
   namespace: argocd
 spec:
   project: default
@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/kanzalqalandri/gitops.git
     targetRevision: main
-    path: apps/client-a #watches only client-a’s apps
+    path: argo-apps/client-a
     directory:
       recurse: true
   syncPolicy:
